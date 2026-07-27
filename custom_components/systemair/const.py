@@ -129,7 +129,8 @@ MODEL_SPECS = {
 
 
 def normalise_model_name(model: str) -> str:
-    """Normalise a model name so catalogue keys and device-reported strings compare equal.
+    """
+    Normalise a model name so catalogue keys and device-reported strings compare equal.
 
     Units report their own model through "MB Model" (e.g. "SAVE VTR 300 R"), which
     differs from the catalogue keys used by MODEL_SPECS (e.g. "VTR 300/B R"): the
@@ -145,9 +146,7 @@ _NORMALISED_MODEL_SPECS: dict[str, dict[str, Any]] = {normalise_model_name(key):
 def resolve_model_specs(model: str, model_aliases: Mapping[str, str]) -> dict[str, Any] | None:
     """Resolve model specifications through device-profile aliases."""
     return (
-        MODEL_SPECS.get(model)
-        or MODEL_SPECS.get(model_aliases.get(model, ""))
-        or _NORMALISED_MODEL_SPECS.get(normalise_model_name(model))
+        MODEL_SPECS.get(model) or MODEL_SPECS.get(model_aliases.get(model, "")) or _NORMALISED_MODEL_SPECS.get(normalise_model_name(model))
     )
 
 
