@@ -225,10 +225,11 @@ class SystemairHomeSolutionClient(SystemairClientBase):
         self._available = False
         self._auth_failure_count += 1
         if self._auth_failure_count >= AUTH_FAILURE_THRESHOLD:
-            _LOGGER.exception(
+            _LOGGER.error(
                 "Authentication failed %d times in a row for device %s; surfacing reauth",
                 self._auth_failure_count,
                 self.device_id,
+                exc_info=err,
             )
             msg = f"Authentication failed {self._auth_failure_count} times: {err}"
             raise SystemairAuthExpiredError(msg) from err
