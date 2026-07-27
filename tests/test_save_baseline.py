@@ -12,7 +12,7 @@ EXPECTED_SAVE_READ_BLOCKS_BASE = [
     (1101, 88),
     (1201, 74),
     (1351, 3),
-    (1410, 10),
+    (1411, 10),
     (2001, 125),
     (2126, 24),
     (2201, 63),
@@ -63,3 +63,12 @@ class SaveBaselineTest(unittest.TestCase):
         for key, register in expected.items():
             with self.subTest(key=key):
                 assert parameter_map[key].register == register  # noqa: S101
+
+    def test_fan_level_rpm_registers_are_polled(self) -> None:
+        """Every exposed fan-level RPM register must be included in a SAVE polling block."""
+        rpm_keys = (f"REG_FAN_LEVEL_{fan}_{level}_RPM" for level in ("MIN", "LOW", "NORMAL", "HIGH", "MAX") for fan in ("SAF", "EAF"))
+
+        for key in rpm_keys:
+            register = parameter_map[key].register
+            with self.subTest(key=key, register=register):
+                assert any(start <= register < start + count for start, count in READ_BLOCKS_BASE)  # noqa: S101
