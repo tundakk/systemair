@@ -436,12 +436,28 @@ class HomeSolutionClientTest(unittest.TestCase):
                 client._execute_api_request = AsyncMock(side_effect=AuthenticationError("rejected after token rotation"))
 
                 with (
-                    self.assertLogs("custom_components.systemair.homesolution", level="ERROR"),
+                    self.assertLogs("custom_components.systemair.homesolution", level="ERROR") as captured_logs,
                     self.assertRaises(SystemairAuthExpiredError),  # noqa: PT027 -- suite intentionally uses unittest
                 ):
                     asyncio.run(operation(client))
 
                 assert client._auth_failure_count == AUTH_FAILURE_THRESHOLD
+                assert isinstance(captured_logs.records[0].exc_info[1], AuthenticationError)
+
+    def test_reauth_threshold_logs_the_supplied_authentication_error(self) -> None:
+        """The auth helper logs its supplied error without relying on an active exception handler."""
+        client = SystemairHomeSolutionClient("user", "password", "device")
+        client._auth_failure_count = AUTH_FAILURE_THRESHOLD - 1
+        auth_error = AuthenticationError("rejected after token rotation")
+
+        with (
+            self.assertLogs("custom_components.systemair.homesolution", level="ERROR") as captured_logs,
+            self.assertRaises(SystemairAuthExpiredError),  # noqa: PT027 -- suite intentionally uses unittest
+        ):
+            client._raise_authentication_failure(auth_error)
+
+        assert captured_logs.records[0].exc_info is not None
+        assert captured_logs.records[0].exc_info[1] is auth_error
 
     def test_post_write_readback_failure_does_not_reject_accepted_command(self) -> None:
         """A temporary readback timeout is deferred to the next coordinator poll."""

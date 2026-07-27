@@ -1007,7 +1007,7 @@ parameters_list = [
     ),
     # Fan level configuration table (RPM setpoints per level, editable in SAVE Connect mobile app)
     ModbusParameter(
-        register=1410,
+        register=1411,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_SAF_MIN_RPM",
@@ -1016,7 +1016,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1411,
+        register=1412,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_EAF_MIN_RPM",
@@ -1025,7 +1025,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1412,
+        register=1413,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_SAF_LOW_RPM",
@@ -1034,7 +1034,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1413,
+        register=1414,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_EAF_LOW_RPM",
@@ -1043,7 +1043,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1414,
+        register=1415,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_SAF_NORMAL_RPM",
@@ -1052,7 +1052,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1415,
+        register=1416,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_EAF_NORMAL_RPM",
@@ -1061,7 +1061,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1416,
+        register=1417,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_SAF_HIGH_RPM",
@@ -1070,7 +1070,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1417,
+        register=1418,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_EAF_HIGH_RPM",
@@ -1079,7 +1079,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1418,
+        register=1419,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_SAF_MAX_RPM",
@@ -1088,7 +1088,7 @@ parameters_list = [
         max_value=5000,
     ),
     ModbusParameter(
-        register=1419,
+        register=1420,
         sig=IntegerType.UINT,
         reg_type=RegisterType.Holding,
         short="REG_FAN_LEVEL_EAF_MAX_RPM",
