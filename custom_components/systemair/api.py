@@ -353,7 +353,7 @@ class SystemairModbusClient(SystemairClientBase):
 class SystemairSerialClient(SystemairClientBase):
     """Provides a client for interacting with a Systemair unit via Modbus Serial (RS485)."""
 
-    def __init__(  # noqa: PLR0913
+    def __init__(  # noqa: PLR0913, PLR0917 -- serial settings intentionally support positional arguments for compatibility.
         self,
         port: str,
         baudrate: int = 9600,
